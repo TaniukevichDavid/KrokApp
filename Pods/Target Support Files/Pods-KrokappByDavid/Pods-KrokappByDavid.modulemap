@@ -1,0 +1,6 @@
+module Pods_KrokappByDavid {
+  umbrella header "Pods-KrokappByDavid-umbrella.h"
+
+  export *
+  module * { export * }
+}

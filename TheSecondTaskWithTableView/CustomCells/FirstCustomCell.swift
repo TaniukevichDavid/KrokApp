@@ -20,22 +20,20 @@ class FirstCustomCell: UITableViewCell {
         cityImage.loadImageFromURL(urlString: Cities.logo)
     }
     
-    func configure(with Places: Places) {
-        nameСity.text = "\(Places.point_key_name)"
-    }
-    
     private func setUpLayout() {
         contentView.addSubview(nameСity)
         contentView.addSubview(cityImage)
         nameСity.translatesAutoresizingMaskIntoConstraints = false
         cityImage.translatesAutoresizingMaskIntoConstraints = false
+        contentView.backgroundColor = .white
         nameСity.textAlignment = .center
+        nameСity.textColor = .black
         nameСity.font = UIFont.systemFont(ofSize: 23, weight: .light)
         NSLayoutConstraint.activate([
             cityImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             cityImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            cityImage.heightAnchor.constraint(equalToConstant: 115),
-            cityImage.widthAnchor.constraint(equalToConstant: 115),
+            cityImage.heightAnchor.constraint(equalToConstant: 90),
+            cityImage.widthAnchor.constraint(equalToConstant: 90),
             
             nameСity.leadingAnchor.constraint(equalTo: cityImage.trailingAnchor, constant: 15),
             nameСity.centerYAnchor.constraint(equalTo: cityImage.centerYAnchor)

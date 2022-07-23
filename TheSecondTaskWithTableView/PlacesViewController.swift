@@ -4,12 +4,12 @@ import UIKit
 import Alamofire
 
 class PlacesViewController: UIViewController {
-    let tableView = UITableView()
-    let myTitle: String
-    let id: Int
-    let imageUrl = "http://krokapp.by/api/get_points/11/"
-    let infoUrl = "http://krokapp.by/api/rest/points/"
-    var places: [Places] = [] {
+  private let tableView = UITableView()
+  private let citieTitle: String
+  private let id: Int
+  private let imageUrl = "http://krokapp.by/api/get_points/11/"
+  private let infoUrl = "http://krokapp.by/api/rest/points/"
+  private var places: [Places] = [] {
         didSet {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -27,7 +27,7 @@ class PlacesViewController: UIViewController {
     
     
     init(myTitle: String, id: Int) {
-        self.myTitle = myTitle
+        self.citieTitle = myTitle
         self.id = id
         super.init(nibName: nil, bundle: nil)
     }
@@ -38,15 +38,18 @@ class PlacesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.tintColor = .orange
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        view.backgroundColor = .white
+        setUpViewAndNavBar()
         setUpTableVIew()
-        configureNavigationBar(largeTitleColor: .black, backgoundColor: .white, title: myTitle, preferredLargeTitle: true)
         getImagePlaces(url: imageUrl, id: id)
         getNamePlaces(url: infoUrl, id: id)
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.navigationBar.tintColor = UIColor.orange
     }
     
+    private func setUpViewAndNavBar() {
+        view.backgroundColor = .white
+        title = citieTitle
+    }
     
     private func setUpTableVIew() {
         view.addSubview(tableView)
@@ -64,11 +67,10 @@ class PlacesViewController: UIViewController {
     }
     
     private func getImagePlaces(url: String, id: Int) {
-        Alamofire.request(url).responseJSON { responce in
+        AF.request(url).responseJSON { responce in
             guard let result = responce.data else { return }
             do {
-                self.places = try JSONDecoder().decode([Places].self, from: result).filter({$0.city_id == id && $0.lang == 1} )
-                print(self.places)
+                self.places = try JSONDecoder().decode([Places].self, from: result).filter({$0.city_id == id && $0.lang == 1 && $0.visible == true} )
             } catch  {
                 print(error)
             }
@@ -77,7 +79,7 @@ class PlacesViewController: UIViewController {
     }
     
     private func getNamePlaces(url: String, id: Int) {
-        Alamofire.request(url).responseJSON { responce in
+        AF.request(url).responseJSON { responce in
             guard let result = responce.data else { return }
             do {
                 self.namePlaces = try JSONDecoder().decode([NamePlaces].self, from: result).filter({$0.city.id == id})
@@ -87,7 +89,6 @@ class PlacesViewController: UIViewController {
         }
         
     }
-    
     
 }
 
@@ -109,27 +110,32 @@ extension PlacesViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        150
+        125
     }
     
-    
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let placesId = places[indexPath.row].city_id
+        let creationDate = places[indexPath.row].creation_date
+        let placesPhoto = places[indexPath.row].photo
+        let namePlaces = namePlaces[indexPath.row].point_key_name
+        let textPlaces = (places[indexPath.row].text.trimHTMLTags() ?? "<p>")
+        let detailsVC = DetailsViewController(placesId: placesId, placesPhoto: placesPhoto, namePlaces: namePlaces, dataCreation: creationDate, infoPlaces: textPlaces)
+        self.navigationController?.pushViewController(detailsVC, animated: true)
+    }
 }
 
 extension String {
-    init?(htmlEncodedString: String) {
-        guard let data = htmlEncodedString.data(using: .utf8) else { return nil }
+    public func trimHTMLTags() -> String? {
+        guard let htmlStringData = self.data(using: String.Encoding.utf8) else {
+            return nil
+        }
         
-        let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
+        let options: [NSAttributedString.DocumentReadingOptionKey : Any] = [
             .documentType: NSAttributedString.DocumentType.html,
             .characterEncoding: String.Encoding.utf8.rawValue
         ]
         
-        guard let attributedString = try? NSAttributedString(data: data, options: options, documentAttributes: nil) else { return nil }
-        
-        self.init(attributedString.string)
+        let attributedString = try? NSAttributedString(data: htmlStringData, options: options, documentAttributes: nil)
+        return attributedString?.string
     }
 }
-
-
-

@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7493E3BB2885635E00B8D1B6"
-               BuildableName = "TheSecondTaskWithTableView.app"
-               BlueprintName = "TheSecondTaskWithTableView"
-               ReferencedContainer = "container:TheSecondTaskWithTableView.xcodeproj">
+               BuildableName = "KrokappByDavid.app"
+               BlueprintName = "KrokappByDavid"
+               ReferencedContainer = "container:KrokappByDavid.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7493E3BB2885635E00B8D1B6"
-            BuildableName = "TheSecondTaskWithTableView.app"
-            BlueprintName = "TheSecondTaskWithTableView"
-            ReferencedContainer = "container:TheSecondTaskWithTableView.xcodeproj">
+            BuildableName = "KrokappByDavid.app"
+            BlueprintName = "KrokappByDavid"
+            ReferencedContainer = "container:KrokappByDavid.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <CommandLineArguments>
@@ -75,9 +75,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7493E3BB2885635E00B8D1B6"
-            BuildableName = "TheSecondTaskWithTableView.app"
-            BlueprintName = "TheSecondTaskWithTableView"
-            ReferencedContainer = "container:TheSecondTaskWithTableView.xcodeproj">
+            BuildableName = "KrokappByDavid.app"
+            BlueprintName = "KrokappByDavid"
+            ReferencedContainer = "container:KrokappByDavid.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

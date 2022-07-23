@@ -4,33 +4,32 @@ import UIKit
 import Alamofire
 
 class CitiesViewController: UIViewController {
-    
-    let tableView = UITableView()
-    
-    let url = "https://krokapp.by/api/get_cities/11/"
-    
-    var cities: [Cities] = [] {
+    private let tableView = UITableView()
+    private let url = "https://krokapp.by/api/get_cities/11/"
+    private var cities: [Cities] = [] {
         didSet {
             DispatchQueue.main.async {
-                if self.cities.count > 0{
                     self.tableView.reloadData()
-                }
             }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpViewAndNavBar()
         setUpTableVIew()
         getgetData(url: url)
-        configureNavigationBar(largeTitleColor: .black, backgoundColor: .white, title: "Гарады", preferredLargeTitle: true)
-        
+    }
+    
+    private func setUpViewAndNavBar() {
+        view.backgroundColor = .white
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        title = "Гарады"
     }
     
     private func setUpTableVIew() {
         view.addSubview(tableView)
-        view.backgroundColor = .systemBackground
-        tableView.backgroundColor = .systemBackground
+        tableView.backgroundColor = .white
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.delegate = self
         tableView.dataSource = self
@@ -44,7 +43,7 @@ class CitiesViewController: UIViewController {
     }
     
     private func getgetData(url: String) {
-        Alamofire.request(url).responseJSON { responce in
+        AF.request(url).responseJSON { responce in
             guard let result = responce.data else { return }
             do {
                 self.cities = try JSONDecoder().decode([Cities].self, from: result)
@@ -54,7 +53,6 @@ class CitiesViewController: UIViewController {
             }
         }
     }
-    
     
 }
 
@@ -74,17 +72,14 @@ extension CitiesViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        150
+        125
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let city = cities[indexPath.row].name
+        let cityTitle = cities[indexPath.row].name
         let cityId = cities[indexPath.row].id
-        let infoVC = PlacesViewController(myTitle: city, id: cityId)
-        self.navigationController?.pushViewController(infoVC, animated: true)
+        let placesVC = PlacesViewController(myTitle: cityTitle, id: cityId)
+        self.navigationController?.pushViewController(placesVC, animated: true)
     }
     
 }
-
-
-
