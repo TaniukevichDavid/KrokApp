@@ -1,6 +1,8 @@
 
 
 import UIKit
+import AVFoundation
+
 
 class DetailsViewController: UIViewController {
     private let placeImage = UIImageView()
@@ -10,17 +12,20 @@ class DetailsViewController: UIViewController {
     private let namePlaces: String
     private let dataCreationPlaceLabel = UILabel()
     private let dataCreation: String
+    private let soundOfPlace: String
     private let infoPlaces: String
     private let myTextView = UITextView()
     private let playButton = UIButton()
     private lazy var changePosition = false
+    var player = AVPlayer()
     
-    init(placesId: Int, placesPhoto: String, namePlaces: String, dataCreation: String, infoPlaces: String) {
+    init(placesId: Int, placesPhoto: String, dataCreation: String, infoPlaces: String, namePlaces: String, soundOfPlace: String) {
         self.placeId = placesId
         self.placePhoto = placesPhoto
         self.namePlaces = namePlaces
         self.dataCreation = dataCreation
         self.infoPlaces = infoPlaces
+        self.soundOfPlace = soundOfPlace
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -32,6 +37,7 @@ class DetailsViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         startInstallations()
+        setUVoiceActing()
     }
     
     private func startInstallations() {
@@ -45,7 +51,7 @@ class DetailsViewController: UIViewController {
     }
     
     private func setUpAddsSubviewsAndMasks() {
-        [placeImage, placeTextLabel, playButton, myTextView, dataCreationPlaceLabel].forEach {
+        [placeTextLabel, playButton, placeImage, myTextView, dataCreationPlaceLabel].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -77,8 +83,10 @@ class DetailsViewController: UIViewController {
     
     private func setUpPlayButton() {
         playButton.tintColor = .systemOrange
-        playButton.setBackgroundImage(UIImage(systemName: "play.fill"), for: .normal)
-        playButton.addTarget(self, action: #selector(changeImageButton), for: .touchUpInside)
+        if soundOfPlace != "" {
+            playButton.setBackgroundImage(UIImage(systemName: "play.fill"), for: .normal)
+            playButton.addTarget(self, action: #selector(changeImageButton), for: .touchUpInside)
+        }
         NSLayoutConstraint.activate([
             playButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             playButton.topAnchor.constraint(equalTo: placeTextLabel.bottomAnchor, constant: 5),
@@ -88,13 +96,32 @@ class DetailsViewController: UIViewController {
     }
     
     @objc func changeImageButton() {
+        setUVoiceActing()
         changePosition.toggle()
         changePosition == false ? playButton.setBackgroundImage(UIImage(systemName: "play.fill"), for: .normal)  : playButton.setBackgroundImage(UIImage(systemName: "stop.fill"), for: .normal)
+        changePosition == false ? player.pause() : player.play()
+        
+    }
+    
+    private func setUVoiceActing() {
+        if soundOfPlace != "" {
+            do {
+                try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+            } catch {
+                print ("AVAudioSessionCategoryPlayback not work" )
+            }
+            guard let url = URL (string: soundOfPlace) else { return }
+            let playerItem:AVPlayerItem = AVPlayerItem(url: url)
+            player = AVPlayer (playerItem: playerItem)
+        }
     }
     
     private func setUpMyTextView() {
         myTextView.text = infoPlaces
+        myTextView.isEditable = false
         myTextView.textAlignment = .center
+        myTextView.backgroundColor = .white
+        myTextView.textColor = .black
         myTextView.font = UIFont.systemFont(ofSize: 20, weight: .light)
         NSLayoutConstraint.activate([
             myTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),

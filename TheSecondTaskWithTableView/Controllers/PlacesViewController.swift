@@ -4,27 +4,17 @@ import UIKit
 import Alamofire
 
 class PlacesViewController: UIViewController {
-  private let tableView = UITableView()
-  private let citieTitle: String
-  private let id: Int
-  private let imageUrl = "http://krokapp.by/api/get_points/11/"
-  private let infoUrl = "http://krokapp.by/api/rest/points/"
-  private var places: [Places] = [] {
+    private let tableView = UITableView()
+    private let citieTitle: String
+    private let id: Int
+    private let url = "http://krokapp.by/api/get_points/11/"
+    private var places: [Places] = [] {
         didSet {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
         }
     }
-    
-    var namePlaces: [NamePlaces] = [] {
-        didSet {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-    }
-    
     
     init(myTitle: String, id: Int) {
         self.citieTitle = myTitle
@@ -40,8 +30,7 @@ class PlacesViewController: UIViewController {
         super.viewDidLoad()
         setUpViewAndNavBar()
         setUpTableVIew()
-        getImagePlaces(url: imageUrl, id: id)
-        getNamePlaces(url: infoUrl, id: id)
+        getImagePlaces(url: url, id: id)
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationController?.navigationBar.tintColor = UIColor.orange
     }
@@ -75,20 +64,8 @@ class PlacesViewController: UIViewController {
                 print(error)
             }
         }
-        
     }
     
-    private func getNamePlaces(url: String, id: Int) {
-        AF.request(url).responseJSON { responce in
-            guard let result = responce.data else { return }
-            do {
-                self.namePlaces = try JSONDecoder().decode([NamePlaces].self, from: result).filter({$0.city.id == id})
-            } catch  {
-                print(error)
-            }
-        }
-        
-    }
     
 }
 
@@ -102,9 +79,7 @@ extension PlacesViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell  = tableView.dequeueReusableCell(withIdentifier: "SecondCustomCell", for: indexPath) as? SecondCustomCell else { return UITableViewCell()}
         
         let place = places[indexPath.row]
-        let namePlaces = namePlaces[indexPath.row]
         cell.configure(with: place)
-        cell.configure(with: namePlaces)
         
         return cell
     }
@@ -117,9 +92,11 @@ extension PlacesViewController: UITableViewDelegate, UITableViewDataSource {
         let placesId = places[indexPath.row].city_id
         let creationDate = places[indexPath.row].creation_date
         let placesPhoto = places[indexPath.row].photo
-        let namePlaces = namePlaces[indexPath.row].point_key_name
         let textPlaces = (places[indexPath.row].text.trimHTMLTags() ?? "<p>")
-        let detailsVC = DetailsViewController(placesId: placesId, placesPhoto: placesPhoto, namePlaces: namePlaces, dataCreation: creationDate, infoPlaces: textPlaces)
+        let namePlace = (places[indexPath.row].name.trimHTMLTags() ?? "<p>")
+        let soundOfPlace = places[indexPath.row].sound
+        print(soundOfPlace)
+        let detailsVC = DetailsViewController(placesId: placesId, placesPhoto: placesPhoto,  dataCreation: creationDate, infoPlaces: textPlaces, namePlaces: namePlace, soundOfPlace: soundOfPlace)
         self.navigationController?.pushViewController(detailsVC, animated: true)
     }
 }
@@ -139,3 +116,5 @@ extension String {
         return attributedString?.string
     }
 }
+
+

@@ -18,12 +18,16 @@ class CitiesViewController: UIViewController {
         super.viewDidLoad()
         setUpViewAndNavBar()
         setUpTableVIew()
-        getgetData(url: url)
+        getData(url: url)
     }
     
     private func setUpViewAndNavBar() {
         view.backgroundColor = .white
         self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.navigationBar.barTintColor = .white
+        let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black]
+        self.navigationController?.navigationBar.largeTitleTextAttributes = textAttributes
+        self.navigationController?.navigationBar.titleTextAttributes = textAttributes
         title = "Гарады"
     }
     
@@ -42,7 +46,7 @@ class CitiesViewController: UIViewController {
         ])
     }
     
-    private func getgetData(url: String) {
+    private func getData(url: String) {
         AF.request(url).responseJSON { responce in
             guard let result = responce.data else { return }
             do {

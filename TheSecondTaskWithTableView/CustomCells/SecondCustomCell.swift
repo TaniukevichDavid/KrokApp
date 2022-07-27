@@ -20,12 +20,10 @@ class SecondCustomCell: UITableViewCell {
     
     func configure(with Places: Places) {
         placeImage.loadImageFromURL(urlString: Places.logo)
+        namePlace.text = Places.name
     }
     
-    func configure(with NamePlaces: NamePlaces) {
-        namePlace.text = NamePlaces.point_key_name
-    }
-    
+
     private func setUpLayout() {
         contentView.addSubview(namePlace)
         contentView.addSubview(placeImage)
