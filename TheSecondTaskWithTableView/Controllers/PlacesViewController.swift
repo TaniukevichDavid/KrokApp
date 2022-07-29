@@ -32,7 +32,7 @@ class PlacesViewController: UIViewController {
         setUpTableVIew()
         getImagePlaces(url: url, id: id)
         self.navigationController?.navigationBar.prefersLargeTitles = true
-        self.navigationController?.navigationBar.tintColor = UIColor.orange
+        self.navigationController?.navigationBar.tintColor = UIColor.systemOrange
     }
     
     private func setUpViewAndNavBar() {
@@ -89,14 +89,12 @@ extension PlacesViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let placesId = places[indexPath.row].city_id
         let creationDate = places[indexPath.row].creation_date
         let placesPhoto = places[indexPath.row].photo
         let textPlaces = (places[indexPath.row].text.trimHTMLTags() ?? "<p>")
         let namePlace = (places[indexPath.row].name.trimHTMLTags() ?? "<p>")
         let soundOfPlace = places[indexPath.row].sound
-        print(soundOfPlace)
-        let detailsVC = DetailsViewController(placesId: placesId, placesPhoto: placesPhoto,  dataCreation: creationDate, infoPlaces: textPlaces, namePlaces: namePlace, soundOfPlace: soundOfPlace)
+        let detailsVC = DetailsViewController(placesPhoto: placesPhoto,  dataCreation: creationDate, infoPlaces: textPlaces, namePlaces: namePlace, soundOfPlace: soundOfPlace)
         self.navigationController?.pushViewController(detailsVC, animated: true)
     }
 }

@@ -1,10 +1,8 @@
 import UIKit
 
 class FirstCustomCell: UITableViewCell {
-    
-    var cityImage = UIImageView()
+    private var cityImage = UIImageView()
     private let nameСity = UILabel()
-    
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

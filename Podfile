@@ -4,5 +4,5 @@
 target 'KrokappByDavid' do
  pod 'Alamofire' 
 pod 'IQKeyboardManagerSwift'
-
+pod 'GoogleMaps'
 end

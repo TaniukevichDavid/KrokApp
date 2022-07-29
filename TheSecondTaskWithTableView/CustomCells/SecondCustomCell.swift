@@ -5,10 +5,10 @@ import UIKit
 
 class SecondCustomCell: UITableViewCell {
     
-    var placeImage = UIImageView()
+    private var placeImage = UIImageView()
     private let namePlace = UILabel()
+    private let citiesVC = CitiesViewController()
     
-
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setUpLayout()
@@ -23,7 +23,6 @@ class SecondCustomCell: UITableViewCell {
         namePlace.text = Places.name
     }
     
-
     private func setUpLayout() {
         contentView.addSubview(namePlace)
         contentView.addSubview(placeImage)

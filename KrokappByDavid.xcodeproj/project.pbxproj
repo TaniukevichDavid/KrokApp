@@ -20,6 +20,7 @@
 		7493E3DA28857BEE00B8D1B6 /* UIImageView+Exstension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7493E3D928857BEE00B8D1B6 /* UIImageView+Exstension.swift */; };
 		7493E4002886113800B8D1B6 /* PlacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7493E3FF2886113800B8D1B6 /* PlacesViewController.swift */; };
 		7493E40228868CFD00B8D1B6 /* Places.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7493E40128868CFC00B8D1B6 /* Places.swift */; };
+		74A820242893532C0089DBDC /* GoogleMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A820232893532C0089DBDC /* GoogleMapController.swift */; };
 		74D1B56C2886C93600C07915 /* SecondCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D1B56B2886C93600C07915 /* SecondCustomCell.swift */; };
 		E15ECA087F66AB4B2F12FD63 /* libPods-KrokappByDavid.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29C0BEEFCAE5BF0CB4DB4797 /* libPods-KrokappByDavid.a */; };
 /* End PBXBuildFile section */
@@ -43,6 +44,7 @@
 		7493E3D928857BEE00B8D1B6 /* UIImageView+Exstension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Exstension.swift"; sourceTree = "<group>"; };
 		7493E3FF2886113800B8D1B6 /* PlacesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesViewController.swift; sourceTree = "<group>"; };
 		7493E40128868CFC00B8D1B6 /* Places.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Places.swift; sourceTree = "<group>"; };
+		74A820232893532C0089DBDC /* GoogleMapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapController.swift; sourceTree = "<group>"; };
 		74D1B56B2886C93600C07915 /* SecondCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondCustomCell.swift; sourceTree = "<group>"; };
 		B0BD1F2043DF57686E91230F /* Pods-KrokappByDavid.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KrokappByDavid.release.xcconfig"; path = "Target Support Files/Pods-KrokappByDavid/Pods-KrokappByDavid.release.xcconfig"; sourceTree = "<group>"; };
 		BE175E34811EA2F51FE186B2 /* Pods-TheSecondTaskWithTableView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheSecondTaskWithTableView.debug.xcconfig"; path = "Target Support Files/Pods-TheSecondTaskWithTableView/Pods-TheSecondTaskWithTableView.debug.xcconfig"; sourceTree = "<group>"; };
@@ -71,9 +73,11 @@
 		7471DDCD288F5352000AD49F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				743344E4289033D4006FAF05 /* TabBarController.swift */,
 				7493E3C32885635E00B8D1B6 /* CitiesViewController.swift */,
 				7493E3FF2886113800B8D1B6 /* PlacesViewController.swift */,
 				7477270328880E1700BA50C7 /* DetailsViewController.swift */,
+				74A820232893532C0089DBDC /* GoogleMapController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -103,7 +107,6 @@
 				7493E3D528857A0A00B8D1B6 /* Models */,
 				74D1B56A2886C8CC00C07915 /* CustomCells */,
 				7471DDCD288F5352000AD49F /* Controllers */,
-				743344E4289033D4006FAF05 /* TabBarController.swift */,
 				7493E3C12885635E00B8D1B6 /* SceneDelegate.swift */,
 				7493E3BF2885635E00B8D1B6 /* AppDelegate.swift */,
 				7493E3C52885635E00B8D1B6 /* Main.storyboard */,
@@ -162,6 +165,7 @@
 				7493E3B82885635E00B8D1B6 /* Sources */,
 				7493E3B92885635E00B8D1B6 /* Frameworks */,
 				7493E3BA2885635E00B8D1B6 /* Resources */,
+				E00A2EFDB9F3DB85FEF82182 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -241,6 +245,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		E00A2EFDB9F3DB85FEF82182 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KrokappByDavid/Pods-KrokappByDavid-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KrokappByDavid/Pods-KrokappByDavid-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KrokappByDavid/Pods-KrokappByDavid-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -257,6 +278,7 @@
 				7493E3D4288567EE00B8D1B6 /* FirstCustomCell.swift in Sources */,
 				74D1B56C2886C93600C07915 /* SecondCustomCell.swift in Sources */,
 				7493E3DA28857BEE00B8D1B6 /* UIImageView+Exstension.swift in Sources */,
+				74A820242893532C0089DBDC /* GoogleMapController.swift in Sources */,
 				7493E3C22885635E00B8D1B6 /* SceneDelegate.swift in Sources */,
 				7493E40228868CFD00B8D1B6 /* Places.swift in Sources */,
 			);
@@ -416,7 +438,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -446,7 +468,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

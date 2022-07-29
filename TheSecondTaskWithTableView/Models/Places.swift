@@ -11,4 +11,6 @@ struct Places: Codable {
     var text: String
     var name: String
     var sound: String
+    var lat: Double
+    var lng: Double
 }

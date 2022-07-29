@@ -1,20 +1,28 @@
 PODS:
   - Alamofire (5.5.0)
+  - GoogleMaps (7.0.0):
+    - GoogleMaps/Maps (= 7.0.0)
+  - GoogleMaps/Base (7.0.0)
+  - GoogleMaps/Maps (7.0.0):
+    - GoogleMaps/Base
   - IQKeyboardManagerSwift (6.5.9)
 
 DEPENDENCIES:
   - Alamofire
+  - GoogleMaps
   - IQKeyboardManagerSwift
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - GoogleMaps
     - IQKeyboardManagerSwift
 
 SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
+  GoogleMaps: 6e9c923ca035989709fcb5771544fda4cc5fa2a4
   IQKeyboardManagerSwift: 6e839c575c4aa1078d58a596e41244e77abe918f
 
-PODFILE CHECKSUM: 6e662a0c83a434ad8bb1bc09215643dbfe4cdfa0
+PODFILE CHECKSUM: 51066190e10f1951aff911b5eec7b3bf4324d0ac
 
 COCOAPODS: 1.11.3

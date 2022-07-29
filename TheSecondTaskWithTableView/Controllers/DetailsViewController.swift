@@ -7,7 +7,7 @@ import AVFoundation
 class DetailsViewController: UIViewController {
     private let placeImage = UIImageView()
     private let placeTextLabel = UILabel()
-    private let placeId: Int
+
     private let placePhoto: String
     private let namePlaces: String
     private let dataCreationPlaceLabel = UILabel()
@@ -17,10 +17,9 @@ class DetailsViewController: UIViewController {
     private let myTextView = UITextView()
     private let playButton = UIButton()
     private lazy var changePosition = false
-    var player = AVPlayer()
+    private var player = AVPlayer()
     
-    init(placesId: Int, placesPhoto: String, dataCreation: String, infoPlaces: String, namePlaces: String, soundOfPlace: String) {
-        self.placeId = placesId
+    init(placesPhoto: String, dataCreation: String, infoPlaces: String, namePlaces: String, soundOfPlace: String) {
         self.placePhoto = placesPhoto
         self.namePlaces = namePlaces
         self.dataCreation = dataCreation

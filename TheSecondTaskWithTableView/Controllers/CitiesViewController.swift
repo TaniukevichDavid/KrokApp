@@ -9,7 +9,7 @@ class CitiesViewController: UIViewController {
     private var cities: [Cities] = [] {
         didSet {
             DispatchQueue.main.async {
-                    self.tableView.reloadData()
+                self.tableView.reloadData()
             }
         }
     }
@@ -67,11 +67,8 @@ extension CitiesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell  = tableView.dequeueReusableCell(withIdentifier: "FirstCustomCell", for: indexPath) as? FirstCustomCell else { return UITableViewCell()}
-        
         let city = cities[indexPath.row]
         cell.configure(with: city)
-        
-        
         return cell
     }
     
@@ -87,3 +84,7 @@ extension CitiesViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
 }
+
+
+
+
